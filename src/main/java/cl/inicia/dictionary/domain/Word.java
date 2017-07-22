@@ -22,16 +22,20 @@ public class Word {
 
 	@Column(name = "meaning", nullable = false)
 	private String meaning;
-	
-	/*Un usuario tiene muchas palabras*/
+
+	/* Un usuario tiene muchas palabras */
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "languageId")
+	private Language language;
 	
 	public Word() {
-	
+
 	}
-	
+
 	public Word(String word, String meaning) {
 		this.word = word;
 		this.meaning = meaning;
