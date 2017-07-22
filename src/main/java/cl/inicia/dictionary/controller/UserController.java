@@ -15,15 +15,15 @@ import cl.inicia.dictionary.domain.Word;
 import cl.inicia.dictionary.service.MasterService;
 
 @RestController
-@RequestMapping("/words")
-public class WordController {
-	
+@RequestMapping("/user")
+public class UserController {
+
 	@Autowired
-	@Qualifier("wordService")
-	private MasterService service;
+	@Qualifier("userService")
+	private MasterService service;	
 	
-	@RequestMapping(path = "/list", method = RequestMethod.GET)
-	public ResponseEntity<List<Word>> list(OAuth2Authentication auth){
+	@RequestMapping(path = "/words", method = RequestMethod.GET)	
+	public ResponseEntity<List<Word>> words(OAuth2Authentication auth){
 		String username = auth.getName();
 		return new ResponseEntity<List<Word>>(service.getAll(username), HttpStatus.OK);
 	}

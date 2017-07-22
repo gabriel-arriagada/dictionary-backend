@@ -2,26 +2,43 @@ package cl.inicia.dictionary.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity(name = "Word")
+@Table(name = "Word")
 public class Word {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	@Column
-	private String word;
-	
-	@Column
-	private String meaning;
 
+	@Column(name = "word", nullable = false, unique = true)
+	private String word;
+
+	@Column(name = "meaning", nullable = false)
+	private String meaning;
+	
+	/*Un usuario tiene muchas palabras*/
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private User user;
+	
 	public Word() {
-		// TODO Auto-generated constructor stub
+	
+	}
+	
+	public Word(String word, String meaning) {
+		this.word = word;
+		this.meaning = meaning;
 	}
 
-	public Word(int id, String word, String meaning) {
-		this.id = id;
+	public Word(User user, String word, String meaning) {
+		this.user = user;
 		this.word = word;
 		this.meaning = meaning;
 	}
