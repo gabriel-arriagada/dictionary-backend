@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity(name = "User")
 @Table(name = "User")
 public class User {
@@ -33,10 +35,12 @@ public class User {
 	// Esta relación ya fue construida por la clase Word a traves de su variable
 	// user.
 	// LAZY: las palabras del usuario serán cargadas cuando se necesiten
+	@JsonBackReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.PERSIST)
 	private List<Word> words;
 
 	//CascadeType.ALL: Acciones en casada para la entidad relacionada (create, update, delete)
+	@JsonBackReference
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Role> roles;
 	

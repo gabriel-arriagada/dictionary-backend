@@ -21,4 +21,10 @@ public class UserService implements MasterService{
 		return user.getWords();
 	}
 
+	@Override
+	public User findUserByUsername(String username) {
+		User user = repo.findByUsername(username); 		
+		return (user != null) ? user : null; 
+	}
+
 }

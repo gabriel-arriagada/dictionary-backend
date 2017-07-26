@@ -16,7 +16,6 @@ public class OAuth2AuthorizationServer extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-	// Configuration
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.authenticationManager(authenticationManager);
@@ -25,7 +24,8 @@ public class OAuth2AuthorizationServer extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 		// @formatter:off
-		security.checkTokenAccess("isAuthenticated()");
+		security
+		.checkTokenAccess("isAuthenticated()");
 		// @formatter:on
 	}
 
@@ -41,6 +41,6 @@ public class OAuth2AuthorizationServer extends AuthorizationServerConfigurerAdap
 		.accessTokenValiditySeconds(1800)// Media hora
 		.refreshTokenValiditySeconds(3600);//Una hora		
 		// @formatter:on
-	}	
+	}
 
 }

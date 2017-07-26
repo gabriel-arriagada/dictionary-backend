@@ -10,12 +10,15 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import cl.inicia.dictionary.configuration.CustomUserDetails;
+import cl.inicia.dictionary.domain.Language;
 import cl.inicia.dictionary.domain.Role;
 import cl.inicia.dictionary.domain.User;
 import cl.inicia.dictionary.domain.Word;
+import cl.inicia.dictionary.repository.LanguageRepository;
 import cl.inicia.dictionary.repository.UserRepository;
 
 @SpringBootApplication
@@ -27,16 +30,22 @@ public class DictionaryApplication {
 	}
 	
 	@Autowired
-	public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository repo) throws Exception {
+	public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository repo, LanguageRepository lRepo, PasswordEncoder encoder) throws Exception {
 		if (repo.count() == 0) {
-			User user = new User("gabo", "1234", true);
+			
+			Language language = new Language("en", "English");
+			lRepo.save(language);
 						
+			String hash = encoder.encode("1234");
+			User user = new User("gabo", hash, true);			
 			List<Role> roles = new ArrayList<>();		
-			roles.add(new Role(user, "USER"));
+			roles.add(new Role(user, "USER"));							
+			
+			Language language2 = lRepo.findByShortName("en");
 			
 			List<Word> words = new ArrayList<>();
-			words.add(new Word(user, "although", "aunque"));
-			words.add(new Word(user, "accomplish", "realizar"));
+			words.add(new Word(language2, user, "although", "aunque"));
+			words.add(new Word(language2, user, "accomplish", "realizar"));
 			
 			user.setWords(words);
 			user.setRoles(roles);
@@ -47,6 +56,6 @@ public class DictionaryApplication {
 			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 				return new CustomUserDetails(repo.findByUsername(username));
 			}
-		});
+		}).passwordEncoder(encoder);
 	}
 }

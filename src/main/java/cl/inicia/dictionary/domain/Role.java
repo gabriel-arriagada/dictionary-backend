@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity(name = "Role")
 @Table(name = "Role")
 public class Role {
@@ -22,6 +24,7 @@ public class Role {
 	private String roleName;
 
 	/* Un usuario tiene muchas palabras */
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;

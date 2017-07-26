@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity(name = "Language")
 @Table(name = "Language")
 public class Language {
@@ -21,14 +23,23 @@ public class Language {
 	@Column(name = "languageId", nullable = false)
 	private int languageId;
 
+	@Column(name = "shortName", nullable = false)
+	private String shortName;
+
 	@Column(name = "language", nullable = false, unique = true)
 	private String language;
-
+	
+	@JsonBackReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "language", cascade = CascadeType.ALL)
 	private List<Word> words;
 
 	public Language() {
 
+	}
+
+	public Language(String shortName, String language) {
+		this.shortName = shortName;
+		this.language = language;
 	}
 
 	public Language(int languageId, String language) {
@@ -58,6 +69,14 @@ public class Language {
 
 	public void setWords(List<Word> words) {
 		this.words = words;
+	}
+
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
 	}
 
 }

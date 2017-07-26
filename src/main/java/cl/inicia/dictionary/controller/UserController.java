@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import cl.inicia.dictionary.domain.User;
 import cl.inicia.dictionary.domain.Word;
 import cl.inicia.dictionary.service.MasterService;
 
@@ -26,6 +27,11 @@ public class UserController {
 	public ResponseEntity<List<Word>> words(OAuth2Authentication auth){
 		String username = auth.getName();
 		return new ResponseEntity<List<Word>>(service.getAll(username), HttpStatus.OK);
+	}
+	
+	@RequestMapping(path = "/details", method = RequestMethod.GET)
+	public ResponseEntity<User> details(OAuth2Authentication auth){
+		return new ResponseEntity<User>(service.findUserByUsername(auth.getName()), HttpStatus.OK);
 	}
 	
 }
