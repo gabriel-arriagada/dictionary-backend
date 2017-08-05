@@ -21,8 +21,8 @@ import cl.inicia.dictionary.domain.Word;
 import cl.inicia.dictionary.repository.LanguageRepository;
 import cl.inicia.dictionary.repository.UserRepository;
 
-@SpringBootApplication
 @EnableResourceServer
+@SpringBootApplication
 public class DictionaryApplication {
 
 	public static void main(String[] args) {

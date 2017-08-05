@@ -24,7 +24,7 @@ public class WordController {
 
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
 	public ResponseEntity<List<Word>> list(OAuth2Authentication auth) {
-		String username = auth.getName();
+		String username = auth.getName();		
 		// @formatter:off
 		return new ResponseEntity<List<Word>>(
 				service.getAll(username, new PageRequest(0, 5)), HttpStatus.OK);

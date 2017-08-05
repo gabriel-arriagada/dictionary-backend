@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>cl.inicia.dictionary</groupId>
-	<artifactId>dictionary</artifactId>
+	<artifactId>dictionary-ws</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 

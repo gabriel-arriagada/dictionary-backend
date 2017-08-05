@@ -11,11 +11,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 @ComponentScan("cl.inicia.dictionary.controller")
 @EnableWebMvc
-public class WebMvcConfiguration extends WebMvcConfigurerAdapter{
-	
+public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
+
 	@Bean
-	public PasswordEncoder passwordEncoder(){
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 }
