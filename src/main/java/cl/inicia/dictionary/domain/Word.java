@@ -25,14 +25,21 @@ public class Word {
 
 	@Column(name = "meaning", nullable = false)
 	private String meaning;
-	
+
+	@Column(name = "favorite", nullable = false)
+	private boolean favorite;
+
+	@Column(name = "rate", nullable = false)
+	private int rate;
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
 
-	//@JsonManagedReference
-	@JsonIgnore//Decimos que no queremos incluir este objeto en el reponse JSON
+	// @JsonManagedReference
+	@JsonIgnore // Decimos que no queremos incluir este objeto en el reponse
+				// JSON
 	@ManyToOne
 	@JoinColumn(name = "languageId")
 	private Language language;
@@ -46,11 +53,13 @@ public class Word {
 		this.meaning = meaning;
 	}
 
-	public Word(Language language, User user, String word, String meaning) {
+	public Word(Language language, User user, String word, String meaning, boolean favorite, int rate) {
 		this.language = language;
 		this.user = user;
 		this.word = word;
 		this.meaning = meaning;
+		this.favorite = favorite;
+		this.rate = rate;
 	}
 
 	public int getId() {
@@ -76,7 +85,23 @@ public class Word {
 	public void setMeaning(String meaning) {
 		this.meaning = meaning;
 	}
-	
+
+	public boolean isFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(boolean favorite) {
+		this.favorite = favorite;
+	}
+
+	public int getRate() {
+		return rate;
+	}
+
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -84,7 +109,7 @@ public class Word {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public Language getLanguage() {
 		return language;
 	}

@@ -32,6 +32,8 @@ CREATE TABLE IF NOT EXISTS Word(
 	id INT UNSIGNED NOT NULL auto_increment,
 	word VARCHAR(200) NOT NULL,
 	meaning VARCHAR(250) NOT NULL,
+	favorite BOOLEAN NOT NULL,
+	rate INT UNSIGNED NOT NULL,
 	userId INT UNSIGNED NOT NULL,
 	languageId INT UNSIGNED NOT NULL,
 	constraint pk_word primary key (id),

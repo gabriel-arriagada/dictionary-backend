@@ -38,8 +38,8 @@ public class OAuth2AuthorizationServer extends AuthorizationServerConfigurerAdap
 		.secret("secret")
 		.authorizedGrantTypes("password", "authorization_code", "refresh_token")
 		.scopes("read")
-		.accessTokenValiditySeconds(1800)// Media hora
-		.refreshTokenValiditySeconds(3600);//Una hora		
+		.accessTokenValiditySeconds(60)// Media hora
+		.refreshTokenValiditySeconds(120);//Una hora		
 		// @formatter:on
 	}
 

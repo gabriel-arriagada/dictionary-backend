@@ -44,8 +44,8 @@ public class DictionaryApplication {
 			Language language2 = lRepo.findByShortName("en");
 			
 			List<Word> words = new ArrayList<>();
-			words.add(new Word(language2, user, "although", "aunque"));
-			words.add(new Word(language2, user, "accomplish", "realizar"));
+			words.add(new Word(language2, user, "although", "aunque", false, 0));
+			words.add(new Word(language2, user, "accomplish", "realizar", false, 0));
 			
 			user.setWords(words);
 			user.setRoles(roles);

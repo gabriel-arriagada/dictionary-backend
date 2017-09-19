@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.inicia.dictionary.domain.User;
@@ -34,4 +35,9 @@ public class UserController {
 		return new ResponseEntity<User>(service.findUserByUsername(auth.getName()), HttpStatus.OK);
 	}
 	
+	@RequestMapping(path = "/isAuthenticated", method = RequestMethod.GET)
+	@ResponseStatus(code = HttpStatus.OK)
+	public boolean isAuthenticated(){
+		return true;
+	}
 }
